@@ -1,0 +1,58 @@
+# Instalar o pacote certo
+!pip install --upgrade opencv-contrib-python
+
+# Upload do vídeo
+from google.colab import files
+uploaded = files.upload()
+
+# Importar bibliotecas
+import cv2
+import matplotlib.pyplot as plt
+
+def exibir_imagem(frame):
+    img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    plt.imshow(img_rgb)
+    plt.axis('off')
+    plt.show()
+
+# Carregar vídeo
+video_path = list(uploaded.keys())[0]
+cap = cv2.VideoCapture(video_path)
+
+# Ler o primeiro frame
+ret, frame = cap.read()
+
+if not ret:
+    print("Erro ao carregar o vídeo.")
+else:
+    h, w, _ = frame.shape
+    roi = (int(w/2 - 70), int(h/2 - 70), 140, 140)
+
+    p1 = (int(roi[0]), int(roi[1]))
+    p2 = (int(roi[0] + roi[2]), int(roi[1] + roi[3]))
+    cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
+    exibir_imagem(frame)
+
+    # Criar o tracker (use a versão compatível)
+    tracker = cv2.legacy.TrackerCSRT_create()
+
+    # Inicializar
+    tracker.init(frame, roi)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        ok, bbox = tracker.update(frame)
+
+        if ok:
+            p1 = (int(bbox[0]), int(bbox[1]))
+            p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
+            cv2.rectangle(frame, p1, p2, (255, 0, 0), 2, 1)
+        else:
+            cv2.putText(frame, "Falha no rastreamento", (100, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+
+        exibir_imagem(frame)
+
+cap.release()
