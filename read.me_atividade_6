@@ -1,0 +1,17 @@
+RELATÓRIO
+Aplicação de Modelos de Machine Learning: Previsão e Classificação
+
+Objetivo:
+Explorar e aplicar técnicas de regressão linear e regressão logística em duas bases de dados fictícias para prever vendas e detectar fraudes.
+Parte 1: Previsão de Vendas
+Foi criada uma base com 24 registros mensais de vendas, incluindo eventos promocionais. Após dividir os dados e treinar um modelo de regressão linear, obteve-se um R² satisfatório, indicando que o modelo conseguiu captar parte da variação das vendas com base nos meses e eventos.
+
+Parte 2: Detecção de Fraudes
+Com 1.000 registros de transações financeiras, criou-se um modelo de regressão logística para prever fraudes. O modelo obteve uma boa acurácia e o relatório de classificação permitiu identificar o desempenho por classe. A matriz de confusão mostrou equilíbrio entre falsos positivos e negativos.
+
+Percebi como forma de aprendizado a importância da análise dos dados e tratamento de variáveis categóricas, previamente. Sobre diferença entre modelos de regressão para valores contínuos e classificação por categorias. Sobre como interpretar métricas como R², acurácia, matriz de confusão e relatório de classificação.
+
+Conclusão:
+
+A prática permitiu aprimorar o conhecimento em machine learning supervisionado e demonstrou como modelos simples podem ser eficazes na análise de dados reais e simulados.
+
